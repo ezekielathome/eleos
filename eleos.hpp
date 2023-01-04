@@ -23,7 +23,7 @@ enum result_code
 /// interfaces
 class interface {
 public:
-  interface() {}
+  interface() = default;
   template <impl::derived_of<interface> T>
   interface(T *instance, std::string name) {
     impl::registry.emplace(name, dynamic_cast<interface *>(instance));
@@ -39,7 +39,7 @@ public:
 
 class variadic_interface : public interface {
 public:
-  variadic_interface() {}
+  variadic_interface() = default;
   template <impl::derived_of<variadic_interface> T, typename... N>
   variadic_interface(T *instance, N &&... names) {
     auto interface = dynamic_cast<variadic_interface *>(instance);
@@ -50,7 +50,7 @@ public:
 
 class multi_interface : public interface {
 public:
-  multi_interface() {}
+  multi_interface() = default;
   template <impl::derived_of<multi_interface> T, typename... N>
   multi_interface(T *instance, std::vector<std::string> names) {
     auto interface = dynamic_cast<multi_interface *>(instance);
@@ -62,7 +62,7 @@ public:
 /// plugin helpers
 class plugin : public multi_interface {
 public:
-  plugin() {}
+  plugin() = default;
   template <impl::derived_of<plugin> T, typename... V>
   plugin(T *instance, V &&... v) {
     std::vector<std::string> interfaces;
@@ -78,7 +78,7 @@ public:
 
 class generic_plugin : public plugin {
 public:
-  generic_plugin() {}
+  generic_plugin() = default;
   template <impl::derived_of<generic_plugin> T>
   generic_plugin(T *instance) : plugin(instance, 1, 2, 3, 4) {}
 
