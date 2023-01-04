@@ -13,12 +13,7 @@ template <class T, class U> concept derived_of = std::is_base_of<U, T>::value;
 inline static std::unordered_map<std::string, interface *> registry = {};
 } // namespace impl
 
-enum result_code
-{
-    OK = 0,
-    FAILED
-};
-
+enum return_code { OK = 0, FAILED };
 
 /// interfaces
 class interface {
@@ -29,10 +24,10 @@ public:
     impl::registry.emplace(name, dynamic_cast<interface *>(instance));
   }
 
-  static auto find(std::string name) -> void* {
-    for (auto interface: eleos::impl::registry)
-        if (interface.first == name)
-            return interface.second;
+  static auto find(std::string name) -> void * {
+    for (auto interface : eleos::impl::registry)
+      if (interface.first == name)
+        return interface.second;
     return {};
   }
 };
@@ -90,12 +85,12 @@ public:
 };
 } // namespace eleos
 
+extern "C" [[gnu::used]] inline void *CreateInterface(const char *name,
+                                                      u32 *return_code) {
+  auto interface = eleos::interface::find(name);
+  if (return_code)
+    *return_code =
+        interface ? eleos::return_code::OK : eleos::return_code::FAILED;
 
-extern "C" [[gnu::used]] inline void* 
-CreateInterface(const char* name, u32* return_code) {
-    auto interface = eleos::interface::find(name);
-    if (return_code)
-        *return_code = interface ? ReturnCode::OK : ReturnCode::FAILED;
-
-    return interface;
+  return interface;
 }
