@@ -66,11 +66,11 @@ public:
   sample_generic_plugin() : eleos::generic_plugin(this) {}
   ~sample_generic_plugin() = default;
 
-public:
-  virtual bool load(void *, void *) { return 0; }
-  virtual void unload() {}
-  virtual void pause() {}
-  virtual void unpause() {}
-  virtual const char *description() { return "generic_plugin"; }
-};
+  virtual auto load(void * /*unused*/, void * /*unused*/) -> bool {
+    return false;
+  }
+  virtual auto unload() -> void {}
+  virtual auto pause() -> void {}
+  virtual auto unpause() -> void {}
+  virtual auto description() -> const char * { return "generic_plugin"; }
 ```
