@@ -73,4 +73,5 @@ public:
   virtual auto pause() -> void {}
   virtual auto unpause() -> void {}
   virtual auto description() -> const char * { return "generic_plugin"; }
+}
 ```
