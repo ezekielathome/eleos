@@ -86,7 +86,7 @@ public:
 } // namespace eleos
 
 extern "C" [[gnu::used]] inline void *CreateInterface(const char *name,
-                                                      u32 *return_code) {
+                                                      int *return_code) {
   auto interface = eleos::interface::find(name);
   if (return_code)
     *return_code =
