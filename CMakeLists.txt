@@ -1,0 +1,2 @@
+add_library(eleos INTERFACE)
+target_include_directories(eleos INTERFACE .)
