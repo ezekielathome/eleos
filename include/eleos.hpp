@@ -21,7 +21,7 @@ public:
   interface() = default;
   template <impl::derived_of<interface> T>
   interface(T *instance, std::string name) {
-    impl::registry.emplace(name, dynamic_cast<interface *>(instance));
+    impl::registry.emplace(name, instance);
   }
 
   static auto find(std::string name) -> void * {
@@ -37,9 +37,8 @@ public:
   variadic_interface() = default;
   template <impl::derived_of<variadic_interface> T, typename... N>
   variadic_interface(T *instance, N &&... names) {
-    auto interface = dynamic_cast<variadic_interface *>(instance);
     for (auto name : {names...})
-      impl::registry.emplace(name, interface);
+      impl::registry.emplace(name, instance);
   }
 };
 
@@ -48,9 +47,8 @@ public:
   multi_interface() = default;
   template <impl::derived_of<multi_interface> T, typename... N>
   multi_interface(T *instance, std::vector<std::string> names) {
-    auto interface = dynamic_cast<multi_interface *>(instance);
     for (auto name : names)
-      impl::registry.emplace(name, interface);
+      impl::registry.emplace(name, instance);
   }
 };
 
@@ -67,7 +65,7 @@ public:
       interfaces.push_back(std::string(buf));
     }
 
-    multi_interface(dynamic_cast<plugin *>(instance), interfaces);
+    multi_interface(instance, interfaces);
   }
 };
 
