@@ -15,7 +15,7 @@ inline static std::unordered_map<std::string, interface *> registry = {};
 
 enum result_code
 {
-    OK = 0 ,
+    OK = 0,
     FAILED
 };
 
