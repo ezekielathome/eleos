@@ -11,7 +11,8 @@ namespace eleos {
 class interface;
 
 namespace impl {
-template <class T, class U> concept derived_of = std::is_base_of<U, T>::value;
+template <class T, class U>
+concept derived_of = std::is_base_of<U, T>::value;
 
 inline static std::unordered_map<std::string, interface *> registry = {};
 } // namespace impl
@@ -41,7 +42,7 @@ class variadic_interface : public interface {
 public:
   variadic_interface() = default;
   template <impl::derived_of<variadic_interface> T, typename... N>
-  explicit variadic_interface(T *instance, N &&... names) {
+  explicit variadic_interface(T *instance, N &&...names) {
     for (auto name : {names...}) {
       impl::registry.emplace(name, instance);
     }
@@ -64,7 +65,7 @@ class plugin : public multi_interface {
 public:
   plugin() = default;
   template <impl::derived_of<plugin> T, typename... V>
-  explicit plugin(T *instance, V &&... versions) {
+  explicit plugin(T *instance, V &&...versions) {
     std::vector<std::string> interfaces;
     for (auto version : {versions...}) {
       char buffer[128];
