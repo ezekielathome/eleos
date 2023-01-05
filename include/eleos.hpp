@@ -14,6 +14,9 @@ namespace eleos {
     template < class T, class U >
     concept derived_of = std::is_base_of< U, T >::value;
 
+    template < typename T >
+    concept signed_integral = std::is_integral_v< T > && std::is_signed_v< T >;
+
     inline static std::unordered_map< std::string, interface * > registry = { };
   } // namespace impl
 
@@ -52,7 +55,7 @@ namespace eleos {
   class multi_interface : public interface {
   public:
     multi_interface( ) = default;
-    template < impl::derived_of< multi_interface > T, typename... N >
+    template < impl::derived_of< multi_interface > T >
     multi_interface( T *instance, const std::vector< std::string > &names ) {
       for ( auto const &name : names ) {
         impl::registry.emplace( name, instance );
@@ -64,7 +67,7 @@ namespace eleos {
   class plugin : public multi_interface {
   public:
     plugin( ) = default;
-    template < impl::derived_of< plugin > T, typename... V >
+    template < impl::derived_of< plugin > T, impl::signed_integral... V >
     explicit plugin( T *instance, V &&...versions ) {
       std::vector< std::string > interfaces;
       for ( auto version : { versions... } ) {
