@@ -7,6 +7,7 @@
 #include <vector>
 
 namespace eleos {
+  // forward declarations
   class interface;
 
   namespace impl {
