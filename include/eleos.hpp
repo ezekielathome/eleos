@@ -7,7 +7,6 @@
 #include <vector>
 
 namespace eleos {
-  // forward declarations
   class interface;
 
   namespace impl {
@@ -17,6 +16,10 @@ namespace eleos {
     template < typename T >
     concept signed_integral = std::is_integral_v< T > && std::is_signed_v< T >;
 
+    template < typename T >
+    concept string_like = std::is_convertible_v<T, std::string_view>;
+    
+    /// Interface registry
     inline static std::unordered_map< std::string, interface * > registry = { };
   } // namespace impl
 
@@ -26,9 +29,16 @@ namespace eleos {
   class interface {
   public:
     interface( ) = default;
-    template < impl::derived_of< interface > T >
-    explicit interface( T *instance, std::string name ) {
-      impl::registry.emplace( name, instance );
+    template < impl::derived_of< interface > T, impl::string_like... N >
+    explicit interface( T *instance, N&& ...names ) {
+      (impl::registry.emplace( names, instance ), ...);
+    }
+
+    template < impl::derived_of< interface > T, impl::string_like N >
+    explicit interface( T *instance, const std::vector< N > &names) {
+      for ( auto const &name : names ) {
+        impl::registry.emplace( name, instance );
+      }
     }
 
     static auto find( const std::string &name ) -> void * {
@@ -41,30 +51,9 @@ namespace eleos {
     }
   };
 
-  class variadic_interface : public interface {
-  public:
-    variadic_interface( ) = default;
-    template < impl::derived_of< variadic_interface > T, typename... N >
-    explicit variadic_interface( T *instance, N &&...names ) {
-      for ( auto name : { names... } ) {
-        impl::registry.emplace( name, instance );
-      }
-    }
-  };
-
-  class multi_interface : public interface {
-  public:
-    multi_interface( ) = default;
-    template < impl::derived_of< multi_interface > T >
-    multi_interface( T *instance, const std::vector< std::string > &names ) {
-      for ( auto const &name : names ) {
-        impl::registry.emplace( name, instance );
-      }
-    }
-  };
 
   /// plugin helpers
-  class plugin : public multi_interface {
+  class plugin : public interface {
   public:
     plugin( ) = default;
     template < impl::derived_of< plugin > T, impl::signed_integral... V >
@@ -77,7 +66,7 @@ namespace eleos {
         interfaces.emplace_back( std::string( buffer ) );
       }
 
-      multi_interface( instance, interfaces );
+      interface( instance, interfaces );
     }
   };
 
