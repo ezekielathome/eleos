@@ -14,10 +14,10 @@ public:
 };
 
 /// variadic interface
-class sample_variadic_interface : public eleos::variadic_interface {
+class sample_variadic_interface : public eleos::interface {
 public:
   sample_variadic_interface( )
-      : eleos::variadic_interface(
+      : eleos::interface(
             this,
             "ISAMPLEINTERFACE001",
             "ISAMPLEINTERFACE002",
@@ -28,10 +28,10 @@ public:
 };
 
 /// multi interface
-class sample_multi_interface : public eleos::multi_interface {
+class sample_multi_interface : public eleos::interface {
 public:
   sample_multi_interface( )
-      : eleos::multi_interface(
+      : eleos::interface(
             this,
             { "ISAMPLEINTERFACE001",
               "ISAMPLEINTERFACE002",
