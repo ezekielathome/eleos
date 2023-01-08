@@ -6,8 +6,6 @@
 c++20 header-only library for exposing source engine interfaces
 </div>
 
-
-
 ## example
 ```cpp
 /// interface
