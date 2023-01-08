@@ -1,9 +1,16 @@
-# eleos
+<div align="center">
+  <h3><a href="https://github.com/ezekielathome">
+    ~ezekielathome/</a>eleos –
+    <span style="font-size: 1.25vw">έ‧λε‧ος ( mercy, compassion )</span>
+  </h3>
 c++20 header-only library for exposing source engine interfaces
+</div>
+
+
 
 ## example
 ```cpp
-/// named interface
+/// interface
 class sample_interface : public eleos::interface {
 public:
   sample_interface( )

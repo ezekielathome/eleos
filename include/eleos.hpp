@@ -18,8 +18,8 @@ namespace eleos {
     concept signed_integral = std::is_integral_v< T > && std::is_signed_v< T >;
 
     template < typename T >
-    concept string_like = std::is_convertible_v<T, std::string_view>;
-    
+    concept string_like = std::is_convertible_v< T, std::string_view >;
+
     /// Interface registry
     inline static std::unordered_map< std::string, interface * > registry = { };
   } // namespace impl
@@ -31,12 +31,12 @@ namespace eleos {
   public:
     interface( ) = default;
     template < impl::derived_of< interface > T, impl::string_like... N >
-    explicit interface( T *instance, N&& ...names ) {
-      (impl::registry.emplace( names, instance ), ...);
+    explicit interface( T *instance, N &&...names ) {
+      ( impl::registry.emplace( names, instance ), ... );
     }
 
     template < impl::derived_of< interface > T, impl::string_like N >
-    explicit interface( T *instance, const std::vector< N > &names) {
+    explicit interface( T *instance, const std::vector< N > &names ) {
       for ( auto const &name : names ) {
         impl::registry.emplace( name, instance );
       }
@@ -51,7 +51,6 @@ namespace eleos {
       return { };
     }
   };
-
 
   /// plugin helpers
   class plugin : public interface {
