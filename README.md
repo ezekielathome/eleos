@@ -1,7 +1,6 @@
 <div align="center">
   <h3><a href="https://github.com/ezekielathome">
-    ~ezekielathome/</a>eleos –
-    <span style="font-size: 1.25vw">έ‧λε‧ος ( mercy, compassion )</span>
+    ~ezekielathome/</a>eleos – έ‧λε‧ος ( mercy, compassion )
   </h3>
 c++20 header-only library for exposing source engine interfaces
 </div>
