@@ -38,28 +38,28 @@ namespace eleos {
         impl::registry.emplace( name, instance );
       }
     }
-
-    /// search registry for interface
-    static auto find( const std::string &name ) -> void * {
-      for ( auto const &interface : eleos::impl::registry ) {
-        if ( interface.first == name ) {
-          return interface.second;
-        }
-      }
-      return { };
-    }
   };
+
+  extern "C" [[gnu::used]] inline auto
+  CreateInterface( const char *name, int *return_code ) -> void * {
+    // search through interface registry
+    auto interface =  [name]() -> void* {
+      if ( auto interface = impl::registry.find( name );
+           interface != impl::registry.end( ) )
+        return interface->second;
+      else
+        return { };
+    } ();
+    
+    // set return_code if it's valid
+    if ( return_code != nullptr ) {
+      *return_code = interface != nullptr ? eleos::return_code::OK
+                                          : eleos::return_code::FAILED;
+    }
+
+    return interface;
+  }
 } // namespace eleos
 
-extern "C" [[gnu::used]] inline auto
-CreateInterface( const char *name, int *return_code ) -> void * {
-  auto *interface = eleos::interface::find( name );
-  if ( return_code != nullptr ) {
-    *return_code = interface != nullptr ? eleos::return_code::OK
-                                        : eleos::return_code::FAILED;
-  }
-
-  return interface;
-}
 
 #endif // ELEOS_HPP
