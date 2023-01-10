@@ -25,6 +25,32 @@ public:
   // ...
 };
 
+// examples of exposing multiple interfaces (variadic, vector)
+class sample_variadic_interface : public eleos::interface {
+public:
+  sample_variadic_interface( )
+      : eleos::interface(
+            this,
+            "ISAMPLEINTERFACE001",
+            "ISAMPLEINTERFACE002",
+            "ISAMPLEINTERFACE003" ) {}
+  ~sample_variadic_interface( ) = default;
+
+  // ...
+};
+class sample_vector_interface : public eleos::interface {
+public:
+  sample_variadic_interface( )
+      : eleos::interface(
+            this,
+            { "ISAMPLEINTERFACE001",
+              "ISAMPLEINTERFACE002",
+              "ISAMPLEINTERFACE003" } ) {}
+  ~sample_variadic_interface( ) = default;
+
+  // ...
+};
+
 // sample plugin
 class sample_plugin
     : public eleos::interface
