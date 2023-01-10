@@ -5,9 +5,17 @@
 c++20 header-only library for exposing source engine interfaces
 </div>
 
-## example
+## usage
 ```cpp
-/// interface
+/// interface constructors
+template < impl::derived_of< interface > T, impl::string_like... N >
+explicit interface( T *instance, N &&...names );
+
+template < impl::derived_of< interface > T, impl::string_like N >
+explicit interface( T *instance, const std::vector< N > &names );
+
+/// example usages
+// sample interface
 class sample_interface : public eleos::interface {
 public:
   sample_interface( )
@@ -17,69 +25,22 @@ public:
   // ...
 };
 
-/// variadic interface
-class sample_variadic_interface : public eleos::interface {
+// sample plugin
+class sample_plugin
+    : public eleos::interface
+    , valve::plugin_callbacks::v4 {
 public:
-  sample_variadic_interface( )
-      : eleos::interface(
-            this,
-            "ISAMPLEINTERFACE001",
-            "ISAMPLEINTERFACE002",
-            "ISAMPLEINTERFACE003" ) {}
-  ~sample_variadic_interface( ) = default;
+  sample_plugin( )
+      : eleos::interface( this, "ISERVERPLUGINCALLBACKS004" ) {}
+  ~sample_plugin( ) = default;
 
   // ...
-};
-
-/// multi interface
-class sample_multi_interface : public eleos::interface {
-public:
-  sample_multi_interface( )
-      : eleos::interface(
-            this,
-            { "ISAMPLEINTERFACE001",
-              "ISAMPLEINTERFACE002",
-              "ISAMPLEINTERFACE003" } ) {}
-  ~sample_multi_interface( ) = default;
-
-  // ...
-};
-
-/// plugin by version
-class sample_plugin_v4 : public eleos::plugin {
-public:
-  sample_plugin_v4( )
-      : eleos::plugin( this, 4 ) {}
-  ~sample_plugin_v4( ) = default;
-
-  // ...
-};
-
-/// plugin multiple versions
-class sample_plugin_multiversion : public eleos::plugin {
-public:
-  sample_plugin_multiversion( )
-      : eleos::plugin( this, 3, 4 ) {}
-  ~sample_plugin_multiversion( ) = default;
-
-  // ...
-};
-
-/// generic plugin
-// exposes IServerPluginCallbacks versions 1 through 4
-// only exposes the callbacks load, unload, pause, unpause and description.
-class sample_generic_plugin : public eleos::generic_plugin {
-public:
-  sample_generic_plugin( )
-      : eleos::generic_plugin( this ) {}
-  ~sample_generic_plugin( ) = default;
-
   virtual auto load( void * /*unused*/, void * /*unused*/ ) -> bool {
     return false;
   }
   virtual auto unload( ) -> void {}
   virtual auto pause( ) -> void {}
   virtual auto unpause( ) -> void {}
-  virtual auto description( ) -> const char * { return "generic_plugin"; }
+  virtual auto description( ) -> const char * { return "sample_plugin"; }
 }
 ```
