@@ -6,22 +6,34 @@ c++20 header-only library for exposing source engine interfaces
 </div>
 
 ## installation
-cmake (FetchContent)
+cmake
 ```cmake
+# Subdir
+add_subdirectory("path/to/eleos")
+
+# FetchContent
 FetchContent_Declare(
   eleos
   GIT_REPOSITORY https://github.com/ezekielathome/eleos.git
   GIT_TAG v1.0
 )
+
+FetchContent_MakeAvailable(eleos)
+
+# ...
+
+target_link_libraries(library PUBLIC eleos)
 ```
 cmkr.build
 ```toml
-
 [fetch-content]
 eleos = { git = "https://github.com/ezekielathome/eleos", tag = "v1.0" }
+
+[target.library]
+link-libraries = ["eleos"]
 ```
 
-## usage
+## example
 ```cpp
 /// interface constructors
 template < impl::derived_of< interface > T, impl::string_like... N >
