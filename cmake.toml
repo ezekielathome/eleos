@@ -1,0 +1,9 @@
+[project]
+name = "eleos"
+description = "c++20 header-only library for exposing source engine interfaces"
+
+[target.eleos]
+type = "interface"
+include-directories = ["include"]
+compile-features = ["cxx_std_20"]
+
