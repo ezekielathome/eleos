@@ -29,3 +29,14 @@ project(eleos
 		"c++20 header-only library for exposing source engine interfaces"
 )
 
+# Target: eleos
+add_library(eleos INTERFACE)
+
+target_compile_features(eleos INTERFACE
+	cxx_std_20
+)
+
+target_include_directories(eleos INTERFACE
+	include
+)
+
