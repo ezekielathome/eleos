@@ -35,13 +35,6 @@ namespace eleos {
     explicit interface( T *instance, N &&...names ) {
       ( impl::registry.emplace( names, instance ), ... );
     }
-
-    template < impl::derived_of< interface > T, impl::string_like N >
-    explicit interface( T *instance, const std::vector< N > &names ) {
-      for ( auto const &name : names ) {
-        impl::registry.emplace( name, instance );
-      }
-    }
   };
 
   // exported function called by source engine

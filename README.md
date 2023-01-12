@@ -66,18 +66,6 @@ public:
 
   // ...
 };
-class sample_vector_interface : public eleos::interface {
-public:
-  sample_vector_interface( )
-      : eleos::interface(
-            this,
-            { "ISAMPLEINTERFACE001",
-              "ISAMPLEINTERFACE002",
-              "ISAMPLEINTERFACE003" } ) {}
-  ~sample_vector_interface( ) = default;
-
-  // ...
-};
 
 // sample plugin
 class sample_plugin
