@@ -25,6 +25,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 project(eleos
+	VERSION
+		1.0.0
 	DESCRIPTION
 		"c++20 header-only library for exposing source engine interfaces"
 )

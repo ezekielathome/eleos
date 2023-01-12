@@ -1,6 +1,7 @@
 [project]
 name = "eleos"
 description = "c++20 header-only library for exposing source engine interfaces"
+version = "1.0.0"
 
 [target.eleos]
 type = "interface"
