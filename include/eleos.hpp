@@ -41,7 +41,7 @@ namespace eleos {
   extern "C" [[gnu::used]] inline auto
   CreateInterface( const char *name, int *return_code ) -> void * {
     // search through interface registry
-    auto interface = [ name ]( ) -> void * {
+    auto *interface = [ name ]( ) -> void * {
       if ( auto interface = impl::registry.find( name );
            interface != impl::registry.end( ) )
         return interface->second;
