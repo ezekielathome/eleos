@@ -15,7 +15,7 @@ add_subdirectory("path/to/eleos")
 FetchContent_Declare(
   eleos
   GIT_REPOSITORY https://github.com/ezekielathome/eleos.git
-  GIT_TAG 1.0.0
+  GIT_TAG 1.1.0
 )
 
 FetchContent_MakeAvailable(eleos)
@@ -27,7 +27,7 @@ target_link_libraries(library PUBLIC eleos)
 * cmkr.build
 ```toml
 [fetch-content]
-eleos = { git = "https://github.com/ezekielathome/eleos", tag = "1.0.0" }
+eleos = { git = "https://github.com/ezekielathome/eleos", tag = "1.1.0" }
 
 [target.library]
 link-libraries = ["eleos"]
