@@ -8,3 +8,7 @@ type = "interface"
 include-directories = ["include"]
 compile-features = ["cxx_std_20"]
 
+[target.plugin]
+type = "shared"
+sources = ["examples/plugin.cpp"]
+link-libraries = ["eleos"]

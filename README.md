@@ -6,7 +6,7 @@ c++20 header-only library for exposing source engine interfaces
 </div>
 
 ## installation
-cmake
+* cmake
 ```cmake
 # Subdir
 add_subdirectory("path/to/eleos")
@@ -24,7 +24,7 @@ FetchContent_MakeAvailable(eleos)
 
 target_link_libraries(library PUBLIC eleos)
 ```
-cmkr.build
+* cmkr.build
 ```toml
 [fetch-content]
 eleos = { git = "https://github.com/ezekielathome/eleos", tag = "1.0.0" }
@@ -33,16 +33,9 @@ eleos = { git = "https://github.com/ezekielathome/eleos", tag = "1.0.0" }
 link-libraries = ["eleos"]
 ```
 
-## example
+## examples
+See examples directory for complete examples.
 ```cpp
-/// interface constructors
-template < impl::derived_of< interface > T, impl::string_like... N >
-explicit interface( T *instance, N &&...names );
-
-template < impl::derived_of< interface > T, impl::string_like N >
-explicit interface( T *instance, const std::vector< N > &names );
-
-/// example usages
 // sample interface
 class sample_interface : public eleos::interface {
 public:
@@ -53,7 +46,8 @@ public:
   // ...
 };
 
-// examples of exposing multiple interfaces (variadic, vector)
+// examples of exposing an interface through
+// multiple interface names (variadic)
 class sample_variadic_interface : public eleos::interface {
 public:
   sample_variadic_interface( )
