@@ -38,7 +38,7 @@ namespace eleos {
 
   // exported function called by source engine
   // to find a given interface
-  extern "C" [[gnu::used]] inline auto
+  extern "C" __attribute__((used)) inline auto
   CreateInterface( const char *name, int *return_code ) -> void * {
     // search through interface registry
     auto *interface = [ name ]( ) -> void * {
