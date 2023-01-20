@@ -45,8 +45,7 @@ namespace eleos {
       if ( auto interface = impl::registry.find( name );
            interface != impl::registry.end( ) )
         return interface->second;
-      else
-        return { };
+      return { };
     }( );
 
     // set return_code if applicable
