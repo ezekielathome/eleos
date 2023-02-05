@@ -5,7 +5,8 @@
 c++20 header-only library for exposing source engine interfaces
 </div>
 
-## installation
+#
+### installation
 * cmake
 ```cmake
 # Subdir
@@ -33,7 +34,7 @@ eleos = { git = "https://github.com/ezekielathome/eleos", tag = "1.1.0" }
 link-libraries = ["eleos"]
 ```
 
-## examples
+### examples
 See [examples](examples/) directory for complete examples.
 ```cpp
 // sample interface
