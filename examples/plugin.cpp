@@ -1,4 +1,5 @@
-#include <eleos.hpp>
+#include <stdio.h>   // iwyu: for printf
+#include <eleos.hpp> // iwyu: for interface
 
 class sample_plugin : public eleos::interface {
 public:
