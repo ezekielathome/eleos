@@ -1,13 +1,12 @@
-#include <stdio.h>   // iwyu: for printf
 #include <eleos.hpp> // iwyu: for interface
+#include <stdio.h>   // iwyu: for printf
 
 class sample_plugin : public eleos::interface {
 public:
   sample_plugin( )
       : eleos::interface( this, "ISERVERPLUGINCALLBACKS004" ) {}
-  ~sample_plugin( ) { };
 
-  virtual auto load( void *, void * ) -> bool {
+  virtual auto load( void * /*unused*/, void * /*unused*/ ) -> bool {
     printf( "sample_plugin!\n" );
     return false;
   }
