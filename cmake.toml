@@ -1,14 +1,9 @@
 [project]
 name = "eleos"
 description = "c++20 header-only library for exposing source engine interfaces"
-version = "1.1.0"
+version = "1.0.0"
 
 [target.eleos]
 type = "interface"
 include-directories = ["include"]
 compile-features = ["cxx_std_20"]
-
-[target.plugin]
-type = "shared"
-sources = ["examples/plugin.cpp"]
-link-libraries = ["eleos"]
