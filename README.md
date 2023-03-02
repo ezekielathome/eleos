@@ -35,7 +35,6 @@ link-libraries = ["eleos"]
 ```
 
 ### examples
-See [examples](examples/) directory for complete examples.
 ```cpp
 // sample interface
 class sample_interface : public eleos::interface {
