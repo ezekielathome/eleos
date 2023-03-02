@@ -4,7 +4,7 @@
 class sample_plugin : public eleos::interface {
 public:
   sample_plugin( )
-      : eleos::interface( this, "ISERVERPLUGINCALLBACKS004" ) {}
+      : eleos::interface( "ISERVERPLUGINCALLBACKS004" ) {}
 
   virtual auto load( void * /*unused*/, void * /*unused*/ ) -> bool {
     printf( "sample_plugin!\n" );

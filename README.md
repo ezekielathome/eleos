@@ -41,7 +41,7 @@ See [examples](examples/) directory for complete examples.
 class sample_interface : public eleos::interface {
 public:
   sample_interface( )
-      : eleos::interface( this, "ISAMPLEINTERFACE001" ) {}
+      : eleos::interface( "ISAMPLEINTERFACE001" ) {}
   ~sample_interface( ) = default;
 
   // ...
@@ -53,7 +53,6 @@ class sample_variadic_interface : public eleos::interface {
 public:
   sample_variadic_interface( )
       : eleos::interface(
-            this,
             "ISAMPLEINTERFACE001",
             "ISAMPLEINTERFACE002",
             "ISAMPLEINTERFACE003" ) {}
@@ -68,7 +67,7 @@ class sample_plugin
     , valve::plugin_callbacks::v4 {
 public:
   sample_plugin( )
-      : eleos::interface( this, "ISERVERPLUGINCALLBACKS004" ) {}
+      : eleos::interface( "ISERVERPLUGINCALLBACKS004" ) {}
   ~sample_plugin( ) = default;
 
   // ...

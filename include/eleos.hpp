@@ -30,15 +30,14 @@ namespace eleos {
   class interface {
   public:
     interface( ) = default;
-    template < impl::derived_of< interface > T, impl::string_like... N >
-    explicit interface( T *instance, N &&...names ) {
-      ( impl::registry.emplace( names, instance ), ... );
+    template < impl::string_like... N > explicit interface( N &&...names ) {
+      ( impl::registry.emplace( names, this ), ... );
     }
   };
 
   // exported function called by source engine
   // to find a given interface
-  extern "C" __attribute__((used)) inline auto
+  extern "C" __attribute__( ( used ) ) inline auto
   CreateInterface( const char *name, int *return_code ) -> void * {
     // search through interface registry
     auto *interface = [ name ]( ) -> void * {
@@ -50,8 +49,8 @@ namespace eleos {
 
     // set return_code if applicable
     if ( return_code != nullptr ) {
-      *return_code = interface != nullptr ? eleos::return_code::OK
-                                          : eleos::return_code::FAILED;
+      *return_code =
+          interface != nullptr ? return_code::OK : return_code::FAILED;
     }
 
     return interface;
