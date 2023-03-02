@@ -42,18 +42,3 @@ target_include_directories(eleos INTERFACE
 	include
 )
 
-# Target: plugin
-set(plugin_SOURCES
-	"examples/plugin.cpp"
-	cmake.toml
-)
-
-add_library(plugin SHARED)
-
-target_sources(plugin PRIVATE ${plugin_SOURCES})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${plugin_SOURCES})
-
-target_link_libraries(plugin PUBLIC
-	eleos
-)
-
